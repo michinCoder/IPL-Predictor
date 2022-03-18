@@ -1,10 +1,18 @@
 import React, {useState, useContext} from 'react'
 import {Row, Col,Form} from 'react-bootstrap'
 
-import firebase from 'firebase/compat/app'
+// import firebase from 'firebase/compat/app'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 // const firestore = firebase.firestore()
+
+import { db } from "../config/firebaseConfig";
+import {
+  collection,
+  addDoc,
+  doc
+} from "firebase/firestore";
+
 
 
 import {UserContext} from '../context/UserContext'
@@ -18,36 +26,17 @@ const Register=()=> {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 
-    // const createUserDocument=async(user, additionalData)=>{
-    //  if(!user){
-    //    return
-    //  }
-    //  const userRef = firebase.doc(`users/${user.uid}`)
-    //  const snapshot = await userRef.get()
-    //  if(!snapshot.exists){
-    //    const {email} = users;
-    //    const {data} = additionalData
-
-    //    try{
-    //     userRef.set({
-    //       name,
-    //       email,
-    //       createdAt: new Date()
-    //     })
-    //    }
-    //    catch(err){
-    //     console.log(err)
-    //    }
-    //  }
-    // }  
-
+  const usersCollectionRef = collection(db, "users");
     const handleSignUp = ()=>{
         const auth = getAuth()
         createUserWithEmailAndPassword(auth, email, password)
         .then((res)=>{
           console.log(res)
           context.setUser({email:res.user.email, uid: res.user.uid})
-          // createUserDocument(res, {data})
+          const createUser = async () => {
+            await addDoc(usersCollectionRef, { email: res.user.email, score: 0, total:0 });
+          };
+          createUser()
         })
           .catch((error)=>{
             console.log(error)
@@ -63,9 +52,9 @@ const Register=()=> {
           handleSignUp()
         }
       
-        // if(context.user?.uid){
-        //   navigate("/")
-        // }
+        if(context.user?.uid){
+          navigate("/")
+        }
        
       
   return (

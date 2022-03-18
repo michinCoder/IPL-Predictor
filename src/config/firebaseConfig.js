@@ -1,9 +1,27 @@
-export default {
-        apiKey: "AIzaSyDj1mJ1qlQDrbIRhl3Mg1hj0IqtWq7L4oY",
-        authDomain: "ipl-predictor-574bf.firebaseapp.com",
-        projectId: "ipl-predictor-574bf",
-        storageBucket: "ipl-predictor-574bf.appspot.com",
-        messagingSenderId: "411925939694",
-        appId: "1:411925939694:web:4b106971fa415fb16b3aff",
-        measurementId: "G-GFE9J58E91"
-      }
+// export default {
+//   apiKey: "AIzaSyAAUTrfq-pxSfXvLwMldPkN6Ik2M5FCt9Y",
+//   authDomain: "iplpredictor-a562c.firebaseapp.com",
+//   projectId: "iplpredictor-a562c",
+//   storageBucket: "iplpredictor-a562c.appspot.com",
+//   messagingSenderId: "46612133472",
+//   appId: "1:46612133472:web:5810679ae084fd6d333505",
+//   measurementId: "G-W284J2YCDB",
+// };
+
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "@firebase/firestore"; 
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAAUTrfq-pxSfXvLwMldPkN6Ik2M5FCt9Y",
+   authDomain: "iplpredictor-a562c.firebaseapp.com",
+    projectId: "iplpredictor-a562c",
+    storageBucket: "iplpredictor-a562c.appspot.com",
+    messagingSenderId: "46612133472",
+    appId: "1:46612133472:web:5810679ae084fd6d333505",
+    measurementId: "G-W284J2YCDB"
+};
+
+const app = initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
