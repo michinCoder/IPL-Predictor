@@ -15,14 +15,21 @@ function Home() {
   const usersCollectionRef = collection(db, "users");
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
-      const players = []
-     const data2 = data.docs.map((doc)=>{
-      //  console.log(doc.data())
-       const player = Object.assign(doc.data())
-       players.push(player)
-       SetUsers(players)
-     })
+      // const players = []
+    //  const data2 = data.docs.map((doc)=>{
+    //    const player = Object.assign(doc.data())
+    //    players.push(player)
+    //    SetUsers(players)
+    //  })
+    const players = []
+    const data2 = data.docs.map((doc)=>{
+    //  console.log(doc.data())
+     players.push(doc.data())
+    })
+    // console.log(players)
+    SetUsers(players)
     };
+    
     getUsers();
   }, []);
 
@@ -38,18 +45,21 @@ function Home() {
             <th>Points</th>
             <th>Total</th>
           </tr>
+          {users.map((user,i)=>{
+            return(
+              <tr key={i}>
+              <td>{i+1}</td>
+              <td>{user.email}</td>
+              <td>{user.score}</td>
+              <td>{user.total}</td>
+
+              </tr>
+            )
+          })}
+         
         </thead>
         <tbody>
-        {users.map((user,index)=>{
-          return (
-            <tr key={index}>
-            <td>{index+1}</td>
-            <td>{user.email}</td>
-            <td>{user.score}</td>
-            <td>{user.total}</td>
-          </tr>
-          )
-        })}
+    
      
         </tbody>
       </Table>
