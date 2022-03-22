@@ -16,7 +16,13 @@ function Header() {
         <Navbar.Toggle className="border-0" aria-controls="navbar-toggle" />
         <Navbar.Collapse id="navbar-toggle">
           <Nav className="ms-auto">
-          {context.user ?  <Link  onClick={()=>{context.setUser(null)}} className="nav-link me-4" to="/">Logout</Link> : (
+          
+          {context.user ?  
+          <>
+          <Link to="/vote"><button type="button" class="btn btn-success me-3">Vote</button></Link>
+          <Link  onClick={()=>{context.setUser(null)}} className="nav-link me-4" to="/">Logout</Link>
+          </>
+           : (
             <>
             <Link className="nav-link me-4" to="/login">Login</Link>
             <Link className="nav-link me-4" to="/register">Register</Link>

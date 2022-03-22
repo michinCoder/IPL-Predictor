@@ -21,6 +21,8 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import PageNotFound from "./Pages/PageNotFound";
+import Vote from "./Pages/Vote"
+import Admin from "./Pages/Admin"
 
 // importing context
 import { UserContext } from "./context/UserContext";
@@ -52,6 +54,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="/vote" element={ <Vote /> } />
+            <Route path='/admin' element={ <Admin /> } />
           </Routes>
           <Footer />
         </UserContext.Provider>
