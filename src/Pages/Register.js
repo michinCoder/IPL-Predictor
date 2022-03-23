@@ -34,7 +34,7 @@ const Register=()=> {
           console.log(res)
           context.setUser({email:res.user.email, uid: res.user.uid})
           const createUser = async () => {
-            await addDoc(usersCollectionRef, { email: res.user.email, score: 0, total:0, isAdmin: false });
+            await addDoc(usersCollectionRef, { email: res.user.email, isAdmin: false, score: 0, total:0 });
           };
           createUser()
         })
