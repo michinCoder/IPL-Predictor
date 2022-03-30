@@ -8,6 +8,7 @@ import {db} from "../config/firebaseConfig";
 import {
   collection,
   addDoc,
+  doc
 } from "firebase/firestore";
 
 import {UserContext} from '../context/UserContext'
@@ -42,7 +43,7 @@ const Admin = () => {
   const context = useContext(UserContext)
   
 
-  const usersCollectionRef = collection(db, "matchData");
+  const usersCollectionRef = doc(db, "matchData/matches");
   const SaveMatchData = ()=>{
    
       context.setUser({MatchNum: matchNum, Team1: team1, Team2: team2})

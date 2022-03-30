@@ -11,16 +11,16 @@ function Header() {
 
   const context = useContext(UserContext);
   const [users, SetUsers] = useState([]);
-  const [isAdmin, setAdmin] = useState(false);
-
+  // const [isAdmin, setAdmin] = useState(false);
+  
   useEffect(() => {
     const usersCollectionRef = collection(db, "users");
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       const players = [];
-      const data2 = data.docs.map((doc) => {
-        players.push(doc.data());
-      });
+      data.docs.map((doc) => (
+        players.push(doc.data())
+      ));
 
       SetUsers(players);     
     };
@@ -41,17 +41,17 @@ function Header() {
           {context.user ?  
           <>
           {users.map(value =>{
-          if(value.isAdmin == true && context.user.email == value.email){
+          if(value.isAdmin === true && context.user.email === value.email){
             return(
-              <Link to="/admin"><button type="button" class="btn btn-warning me-3">Admin</button></Link>
+              <Link to="/admin"><button type="button" className="btn btn-warning me-3">Admin</button></Link>
               );
           }
           })}
           {/* {isAdmin? "helo":"muskan"}
           {console.log(isAdmin)} */}
 
-          <Link to="/vote"><button type="button" class="btn btn-success me-3">Vote</button></Link>
-          <Link  onClick={()=>{context.setUser(null)}} className="nav-link me-4" to="/">Logout</Link>
+          <Link to="/vote"><button type="button" className="btn btn-success me-3">Vote</button></Link>
+          <Link  onClick={()=>{context.setUser(null); localStorage.setItem("token", JSON.stringify(""))}} className="nav-link me-4" to="/">Logout</Link>
           
           </>
            : (
